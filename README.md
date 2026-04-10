@@ -1,5 +1,5 @@
 Operasjonell-frontend-utvikling- Emne 2
-📖 Om prosjektet
+📖 Om prosjektet Stay
 
 Vår kunde er Stay, som har mange små overnattingssteder. De har behov for en brukervennlig digital bookingløsning, slik at besøkende og brukere enkelt kan finne relevant informasjon og booke rom. Prosjektet Stay er en digital tjeneste som gjør det enkelt å finne og booke rom hos små Bed & Breakfast-steder. Løsningen skal gi oversikt over tilgjengelighet, pris og romtype, samt støtte anmeldelser og bookingforespørsler. Målgruppe Vår primærmålgruppe er privatpersoner som ønsker å booke overnatting hos små Bed & Breakfast-steder.
 
