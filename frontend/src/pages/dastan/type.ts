@@ -1,3 +1,5 @@
+// Dastan Salah Hawrami//
+
 
 export type room = {
     id: number;
@@ -5,4 +7,6 @@ export type room = {
     description: string;
     pricePrNight: number;
     maxGuests: number;
+    innsjekk?:string;
+    utsjekk?:string;
 }
