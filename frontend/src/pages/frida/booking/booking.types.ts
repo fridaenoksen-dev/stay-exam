@@ -1,4 +1,4 @@
-export type Bookings = {
+export type Booking = {
   id: number;
   userId: number;
   roomId: number;
@@ -7,5 +7,5 @@ export type Bookings = {
   status: string;
   message: string;
   created: string;
-  uppdated: string;
+  updated: string;
 };
