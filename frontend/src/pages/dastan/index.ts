@@ -1,52 +1,58 @@
-// Dastan Salah Hawrami//
+// Dastan Salah Hawrami
+
 
 
 import { hentAllRoom, oppdaterRoom, opprettRoom, slettRoom} from "./request";
 
-// GET//
+async function main () {
 
 
-hentAllRoom().then(data=> {
-    console.log("READ - Alle room:" , data);
+    // slette alt og start på nytt
+
+       await fetch ("http://localhost:3000/api/reset", {
+        method:"POST",
+        headers:{
+            "authorization": "Bearer mittPassord123"
+        }
+    });
+    console.log("alt er resetet og starter på nytt fro deg");
     
-});
+
+    // GET
+
+    const alleRom = await hentAllRoom();
+    console.log("Read - alle room:" , alleRom);
 
 
-//POST//
 
+    //POST
 
-opprettRoom({
-    name: "suiterom",
-    description: "Perfekt til et bryllup",
-    pricePrNight: 6000,
-    maxGuests: 1 ,
-    innsjekk: "28-09-1984",
-    utsjekk: "28-09-1984"
-}).then(data => {
-    console.log("Lage - opprett nytt rom", data);
+    const nyttRom = await opprettRoom({
+        name: "suitrom",
+        description: "Perfetk til et bryllup dag",
+        pricePrNight: 6000,
+        maxGuests: 2
+    });
+    console.log("Lag - opprett et nytt rom:" , nyttRom);
     
-});
-
-
-//PUT//
-
-oppdaterRoom(1, {
-    name: "Dobbeltrom med sjøutsikt",
-    description: "Nylig oppusset rom med utsikt",
-    pricePrNight: 2400,
-    maxGuests: 1,
-    innsjekk: "28-09-1984",
-    utsjekk: "01-10-1984"
-}).then(data => {
-    console.log("oppdatering - oppdatert rom:" , data);
     
-});
 
+    //PUT
 
+    const oppdatering = await oppdaterRoom(2, {
+        name: "Dobbeltrom med sjøutsikt", 
+        description: "nylig oppusset rom med bedre utsikt",
+        pricePrNight: 3400,
+        maxGuests:2,
+    });
+    console.log("oppdatering - oppdatert rom:" , oppdatering);
 
-//DELETE//
+    //Delete
 
-slettRoom(1).then(() => {
-    console.log("slettet- Rommet er med ID:2 er slettet");
+    await slettRoom(1);
+    console.log("slettet - rom med ID 1 er slettet");
     
-});
+    
+}
+
+main();

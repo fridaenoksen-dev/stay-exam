@@ -1,6 +1,6 @@
 //Dastan Salah Hawrami//
 
-// Jeg lar denne stå for å frostår hva henter og oppdaterer 
+// Jeg lar denne stå for som minnelapp  
 /*
 export type room = {
     id: number;
