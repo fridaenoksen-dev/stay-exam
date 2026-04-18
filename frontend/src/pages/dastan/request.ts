@@ -1,6 +1,6 @@
 //Dastan Salah Hawrami//
 
-// Jeg lar denne stå for som minnelapp  
+// huskelapp   
 /*
 export type room = {
     id: number;
@@ -67,7 +67,7 @@ const api = "http://localhost:3000/api/rooms"
 // Dette er POST //
 
 
- export async function opprettRoom(nyttRom: Partial<room>): Promise<room[]> {
+ export async function opprettRoom(nyttRom: Omit<room, 'id'> ): Promise<room> {
     try {  
     const respons = await fetch(api,{
       method: "POST",
@@ -79,7 +79,7 @@ const api = "http://localhost:3000/api/rooms"
     });
    
     if( respons.ok){
-        const data: room[] = await respons.json();
+        const data: room = await respons.json();
         return data;
      } else {
         throw new Error (`Noe gikk galt: ${respons.status}`);
@@ -96,7 +96,7 @@ const api = "http://localhost:3000/api/rooms"
 // PUT - oppdatere et rom //
 
 
- export async function oppdaterRoom(id: number, oppdaterRoom: Partial<room>): Promise<room[]> {
+ export async function oppdaterRoom(id: number, oppdaterRoom: Partial<room>): Promise<room> {
     try {  
     const respons = await fetch(`${api}/${id}`,{
       method: "PUT",
@@ -108,7 +108,7 @@ const api = "http://localhost:3000/api/rooms"
     });
    
     if( respons.ok){
-        const data: room[] = await respons.json();
+        const data: room = await respons.json();
         return data;
      } else {
         throw new Error (`Noe gikk galt: ${respons.status}`);
@@ -137,7 +137,6 @@ const api = "http://localhost:3000/api/rooms"
    
     if( respons.ok){
       console.log (`rom med ID ${id} er slettet`);
-      
         return;
      } else {
         throw new Error (`Noe gikk galt: ${respons.status}`);
