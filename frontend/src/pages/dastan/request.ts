@@ -1,17 +1,5 @@
 //Dastan Salah Hawrami//
 
-// huskelapp   
-/*
-export type room = {
-    id: number;
-    name: string;
-    description: string;
-    pricePrNight: number;
-    maxGuests: number;
-    innsjekk?: string;
-    utsjekk?: string;
-}
-    */
 
 import type { room } from "./type";
 
@@ -41,7 +29,7 @@ const api = "http://localhost:3000/api/rooms"
 }
 }
 
-// GET. hente et bestemt rom//
+/* GET. hente et bestemt rom
 
  export async function hentEtRoom(id: number): Promise<room> {
     try {  
@@ -63,11 +51,12 @@ const api = "http://localhost:3000/api/rooms"
         
 }
 }
+*/
 
 // Dette er POST //
 
 
- export async function opprettRoom(nyttRom: Omit<room, 'id'> ): Promise<room> {
+ export async function opprettRoom(nyttRom: Partial<room> ): Promise<room> {
     try {  
     const respons = await fetch(api,{
       method: "POST",

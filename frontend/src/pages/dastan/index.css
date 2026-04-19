@@ -206,6 +206,16 @@ h2 {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+.søke-knapp{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.opprett{
+  background-color: #7a1f1b;
+  color: white;
+}
 
 .søke-knapp {
   background-color: #b23a32;

@@ -68,7 +68,7 @@
                   <li>📺 Tv og Wifi</li>
                   </ul>
                 </div>
-                <p class="rom-pris">1900 kr/natt</p>
+                <p class="rom-pris">900 kr/natt</p>
                 <button class="søke-knapp">Book Rom</button>
       </div>
       </div>
@@ -91,7 +91,7 @@
                   <li>📺 Tv og Wifi</li>
                   </ul>
                 </div>
-                <p class="rom-pris">2900 kr/natt</p>
+                <p class="rom-pris">1200 kr/natt</p>
                 <button class="søke-knapp">Book Rom</button>
       </div>
       </div>
@@ -104,14 +104,14 @@
           <div class="søke-rad">
             <div class="søke-felt">
               <label for="innsjekk">Innsjekk</label>
-              <input type="date" id="innsjekk" required>
+              <input type="date" id="innsjekk">
             </div>
       </div>
 
 
 <div class="søke-felt">
   <label for="Utsjekk">Utsjekk</label>
-  <input type="date" id="Utsjekk" required>
+  <input type="date" id="Utsjekk">
 </div>
 
 
@@ -123,11 +123,31 @@
   <option value="3">3 person</option>
 </select>
 </div>
+<div class="søke-felt">
+  <label for="navn">Navn på rom</label>
+  <input type="text" id="navn" placeholder="Navn på rom" required>
+</div>
+<div class="søke-felt">
+  <label for="beskrivelse">Beskrivelse</label>
+  <input type="text" id="beskrivelse" placeholder="Beskrivelse" required>
+</div>
+
+<div class="søke-felt">
+  <label for="pris">Pris per natt</label>
+  <input type="number" id="pris" placeholder="Pris per natt" required>
+</div>
+
+</form>
 
 
 <div class="søke-felt">
-  <button type="submit" class="søke-knapp">Søk</button>
+ <button class="søke-knapp" id="vis-rom-knapp">Vis rom</button>
+ <button class="søke-knapp" id="opprett-knapp">Administere rom</button>
 </div>
+
+ 
+ <div id="rom-liste"></div>
+ 
 
    </div>
 
@@ -136,7 +156,7 @@
   </div>
 
  </div>
- 
+
 
 </main>
 
