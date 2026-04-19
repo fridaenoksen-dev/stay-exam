@@ -8,10 +8,23 @@ Sekundærmålgruppen er privatpersoner som reiser ofte og ønsker en rask oversi
 
 [Frida] - Backlog for mappe 2+samle alt [Dastan Hawrami] - Github-repo+Enkelt arbeidsflyt+Pr-mal [Iben] - Wireframe/sidekart i Figjam 🎯 Funksjonalitet
 
-✅ Brukerregistrering og innlogging ✅ Søk og filtrer rom basert på pris og egenskaper ✅ Se romdetaljer med bilder og beskrivelser ✅ Lese og skrive anmeldelser ✅ Full CRUD-funksjonalitet (Create, Read, Update, Delete) 🛠️ Teknologi
+✅ Brukerregistrering og innlogging 
+✅ Søk og filtrer rom basert på pris og egenskaper 
+✅ Se romdetaljer med bilder og beskrivelser 
+✅ Lese og skrive anmeldelser 
+✅ Full CRUD-funksjonalitet (Create, Read, Update, Delete) 🛠️ Teknologi
 
-Frontend: HTML, CSS, JavaScript API: [Lenke til API-dokumentasjon] Versjonskontroll: GitHub Prosjektstyring: GitHub Projects 📂 Ansvarsfordeling per side
+Frontend: HTML, CSS, JavaScript 
+API: [Lenke til API-dokumentasjon] 
+Versjonskontroll: GitHub 
+Prosjektstyring: GitHub Projects 📂 
+Ansvarsfordeling per side
 
-Gruppe Side Ressurs (API) Dasatan Forside rooms (GET, POST,Delete, Update) Iben Login,registre users (GET, PATCH, DELETE) Fride Mine bookinger bookings (GET, POST, DELETE) Anmeldelser rooms/reviews (GET, POST, DELETE) *Hver side må inneholde full CRUD-funksjonalitet mot API.
+Gruppe Side Ressurs (API) 
+Dasatan Forside rooms (GET, POST,Delete, Update) 
+Iben Login,registre users (GET, PATCH, DELETE) 
+Fride Mine bookinger bookings (GET, POST, DELETE) Anmeldelser rooms/reviews (GET, POST, DELETE) 
 
-Vi oppdatere README etter hvert som prosjektet utvikler seg 🎓
+*Hver side må inneholde full CRUD-funksjonalitet mot API.
+
+Lykke til alle sammen 🎓
