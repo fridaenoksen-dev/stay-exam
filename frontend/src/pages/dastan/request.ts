@@ -53,7 +53,7 @@ const api = "http://localhost:3000/api/rooms"
 }
 */
 
-// POST //
+// Dette er POST //
 
 
  export async function opprettRoom(nyttRom: Partial<room> ): Promise<room> {

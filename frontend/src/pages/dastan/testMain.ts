@@ -29,8 +29,8 @@ async function main () {
 
     const nyttRom = await opprettRoom({
         name: "suitrom",
-        description: "Perfetk til et fantastisk dag",
-        pricePrNight: 4500,
+        description: "Perfetk til et bryllup dag",
+        pricePrNight: 6000,
         maxGuests: 2
     });
    
@@ -43,7 +43,7 @@ async function main () {
     const oppdatering = await oppdaterRoom(2, {
         name: "Dobbeltrom med sjøutsikt", 
         description: "nylig oppusset rom med bedre utsikt",
-        pricePrNight: 2900,
+        pricePrNight: 3400,
         maxGuests:2,
     });
    
