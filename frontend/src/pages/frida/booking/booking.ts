@@ -1,4 +1,4 @@
-import { getBookings } from "./request";
+import { getBookings, deleteBooking } from "./request";
 import type { Booking } from "./booking.types";
 
 function createBookingCard(booking: Booking): string {
@@ -45,9 +45,30 @@ function renderBookings(bookings: Booking[]): void {
   });
 }
 
+function setupDeleteButtons(): void {
+  const deleteButtons = document.querySelectorAll(".btn-delete");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      const id = (event.currentTarget as HTMLElement).dataset.id;
+
+      if (!id) return;
+
+      const confirmed = confirm(
+        "Er du sikker på at du vil kansellere bookingen?",
+      );
+      if (!confirmed) return;
+
+      await deleteBooking(Number(id));
+      await init();
+    });
+  });
+}
+
 async function init() {
   const bookings = await getBookings();
   renderBookings(bookings);
+  setupDeleteButtons();
 }
 
 init();
