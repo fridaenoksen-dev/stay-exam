@@ -9,3 +9,14 @@ export type Booking = {
   created: string;
   updated: string;
 };
+
+export type Room = {
+  id: number;
+  name: string;
+  pricePrNight: number;
+  description: string;
+  features: string[];
+  maxGuests: number;
+  created: string;
+  updated: string;
+};
