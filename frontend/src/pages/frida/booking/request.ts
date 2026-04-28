@@ -13,16 +13,36 @@ export async function getBookings(): Promise<Booking[]> {
   return response.json();
 }
 
-// DELETE funksjon
+// DELETE booking funksjon
 export async function deleteBooking(id: number): Promise<void> {
   const response = await fetch(`${API_URL}/bookings/${id}`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${import.meta.env.API_KEY}` },
+    headers: { Authorization: `Bearer ${import.meta.env.VITE_API_KEY}` },
   });
 
   if (!response.ok) {
     throw new Error("Klarte ikke slette bookingen");
   }
+}
+
+// CREATE booking funksjon
+export async function createBooking(
+  booking: Omit<Booking, "id" | "created" | "updated">,
+): Promise<Booking> {
+  const response = await fetch(`${API_URL}/bookings`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+    },
+    body: JSON.stringify(booking),
+  });
+
+  if (!response.ok) {
+    throw new Error("Klarte ikke å opprette bookingen");
+  }
+
+  return response.json();
 }
 
 // GET room funksjon

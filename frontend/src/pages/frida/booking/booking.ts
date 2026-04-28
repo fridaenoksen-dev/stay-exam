@@ -1,4 +1,4 @@
-import { getBookings, deleteBooking, getRoom } from "./request";
+import { getBookings, deleteBooking, getRoom, createBooking } from "./request";
 import type { Booking, Room } from "./booking.types";
 
 function formatDate(dateString: string): string {
@@ -32,7 +32,7 @@ function createBookingCard(booking: Booking, room: Room): string {
     <div class="booking-content">
         <div class="booking-top">
             <h3 class="room-name">${room.name}</h3>
-            <span class="status-confirmed">${booking.status}</span>
+            <span class="${booking.status === "confirmed" ? "status-confirmed" : "status-pending"}">${booking.status}</span>
         </div>
 
         <div class="dates">
@@ -115,10 +115,74 @@ function setupDeleteButtons(): void {
   });
 }
 
+function setupBookingForm(): void {
+  const btnNewBooking = document.getElementById("btn-new-booking");
+  const overlay = document.getElementById("booking-overlay");
+  const bookingForm = document.getElementById("booking-form");
+  const btnCancel = document.getElementById("btn-cancel");
+
+  if (!btnNewBooking || !overlay || !bookingForm || !btnCancel) return;
+
+  btnNewBooking.addEventListener("click", () => {
+    overlay.style.display = "flex";
+  });
+
+  btnCancel.addEventListener("click", () => {
+    overlay.style.display = "none";
+  });
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      overlay.style.display = "none";
+    }
+  });
+
+  bookingForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // VIKTIG Hindrer siden i å laste på nytt
+    console.log("Test");
+
+    const fromDate = (document.getElementById("fromDate") as HTMLInputElement)
+      .value;
+    const toDate = (document.getElementById("toDate") as HTMLInputElement)
+      .value;
+    const message = (document.getElementById("message") as HTMLTextAreaElement)
+      .value;
+
+    await createBooking({
+      userId: 1,
+      roomId: 1,
+      fromDate,
+      toDate,
+      status: "pending",
+      message,
+    });
+
+    overlay.style.display = "none";
+
+    showToast("✅ Bookingen din er sendt, se oppdatert status på dine sider.");
+
+    function showToast(message: string): void {
+      const toast = document.getElementById("toast");
+      if (!toast) return;
+
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 5000);
+    }
+
+    await init();
+  });
+}
+
 async function init() {
   const bookings = await getBookings();
-  renderBookings(bookings);
+  await renderBookings(bookings);
   setupDeleteButtons();
 }
+
+setupBookingForm();
 
 init();

@@ -50,6 +50,41 @@
     <div class="container">
       <h1>Mine bookinger</h1>
 
+      <button class="btn-primary" id="btn-new-booking">
+        <i class="fa-regular fa-plus"></i> Ny booking
+      </button>
+
+      <div id="booking-overlay" class="modal-overlay" style="display: none">
+        <div class="modal-content">
+          <h2>Opprett en ny booking</h2>
+          <form id="booking-form">
+            <div class="form-group">
+              <label for="fromDate">Innsjekk</label>
+              <input type="date" id="fromDate" required />
+            </div>
+            <div class="form-group">
+              <label for="toDate">Utsjekk</label>
+              <input type="date" id="toDate" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Melding (valgfritt)</label>
+              <textarea
+                id="message"
+                placeholder="Er det noen ønsker eller noe vi bør vite?"
+              ></textarea>
+            </div>
+            <div class="modal-actions">
+              <button type="submit" class="btn-primary">
+                Send bookingforespørsel
+              </button>
+              <button type="button" class="btn-secondary" id="btn-cancel">
+                Avbryt
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
       <!-- Kommende bookinger -->
       <section class="booking-list" aria-label="Mine bookinger">
         <h2>Kommende reiser</h2>
@@ -207,6 +242,11 @@
     <footer>
       <p>© 2026 Stay - Bed and Breakfast</p>
     </footer>
+
+    <div id="toast" class="toast">
+      ✅ Bookingen er sendt, du ser snart oppdatert status på dine sider.
+    </div>
+
     <script type="module" src="/src/pages/frida/booking/booking.ts"></script>
   </body>
 </html>

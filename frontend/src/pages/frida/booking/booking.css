@@ -1,4 +1,77 @@
 /*Frida E. Enoksen*/
+#btn-new-booking {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid #e8ded5;
+  border-radius: var(--s-2);
+  background: #faf7f4;
+}
+
+.form-group textarea {
+  height: 80px;
+  resize: none;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e7f4ea;
+  color: #2e7d32;
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--s-1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.toast.show {
+  opacity: 1;
+}
 
 .booking-list {
   padding: var(--s-3);
@@ -47,6 +120,16 @@
   border-radius: 999px;
   background: #e7f4ea;
   color: #2e7d32;
+}
+
+.status-pending {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #fff8e1;
+  color: #f57f17;
 }
 
 .room-image {
