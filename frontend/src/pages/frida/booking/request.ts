@@ -55,3 +55,24 @@ export async function getRoom(id: number): Promise<Room> {
 
   return response.json();
 }
+
+// EDIT booking funksjon
+export async function updateBooking(
+  id: number,
+  booking: Partial<Omit<Booking, "id" | "created" | "updated">>, //Partial gjør at man bare kan sende det man vil endre. Alle feltene er valgfrie.
+): Promise<Booking> {
+  const response = await fetch(`${API_URL}/bookings/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+    },
+    body: JSON.stringify(booking),
+  });
+
+  if (!response.ok) {
+    throw new Error("Klarte ikke å endre bookingen");
+  }
+
+  return response.json();
+}

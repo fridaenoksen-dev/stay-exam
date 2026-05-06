@@ -1,4 +1,10 @@
-import { getBookings, deleteBooking, getRoom, createBooking } from "./request";
+import {
+  getBookings,
+  deleteBooking,
+  getRoom,
+  createBooking,
+  updateBooking,
+} from "./request";
 import type { Booking, Room } from "./booking.types";
 
 function formatDate(dateString: string): string {
@@ -8,6 +14,18 @@ function formatDate(dateString: string): string {
     month: "short",
     year: "numeric",
   });
+}
+
+function showToast(message: string): void {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 5000);
 }
 
 function calculateTotalPrice(
@@ -66,7 +84,7 @@ function createBookingCard(booking: Booking, room: Room): string {
           </div>
       </div>
       <div class="actions">
-          <button class="btn-secondary" data-id="${booking.id}">
+          <button class="btn-secondary btn-edit" data-id="${booking.id}">
             <i class="fa-regular fa-pen-to-square"></i>Endre booking
           </button>
           <button class="btn-delete" data-id="${booking.id}">
@@ -139,7 +157,6 @@ function setupBookingForm(): void {
 
   bookingForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // VIKTIG Hindrer siden i å laste på nytt
-    console.log("Test");
 
     const fromDate = (document.getElementById("fromDate") as HTMLInputElement)
       .value;
@@ -161,18 +178,77 @@ function setupBookingForm(): void {
 
     showToast("✅ Bookingen din er sendt, se oppdatert status på dine sider.");
 
-    function showToast(message: string): void {
-      const toast = document.getElementById("toast");
-      if (!toast) return;
+    await init();
+  });
+}
 
-      toast.textContent = message;
-      toast.classList.add("show");
+function setupEditButtons(): void {
+  const cardList = document.getElementById("card-list");
+  const editOverlay = document.getElementById("edit-overlay");
+  const editForm = document.getElementById("edit-form");
+  const btnEditCancel = document.getElementById("btn-edit-cancel");
 
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 5000);
+  if (!cardList || !editOverlay || !editForm || !btnEditCancel) return;
+
+  // Setter opp en event deligering istedenfor hver hver enkelt knapp
+  cardList.addEventListener("click", (event) => {
+    const button = (event.target as HTMLElement).closest(".btn-edit");
+    if (!button) return;
+
+    const id = (button as HTMLElement).dataset.id;
+    const card = button.closest(".booking-card");
+
+    if (!id || !card) return;
+
+    const fromDate =
+      card
+        .querySelector("date-item:first-child .date-value")
+        ?.textContent?.trim() ?? "";
+    const toDate =
+      card
+        .querySelector("date-item:last-child .date-value")
+        ?.textContent?.trim() ?? "";
+
+    (document.getElementById("edit-booking-id") as HTMLInputElement).value = id;
+    (document.getElementById("edit-fromDate") as HTMLInputElement).value =
+      fromDate;
+    (document.getElementById("edit-toDate") as HTMLInputElement).value = toDate;
+
+    editOverlay.style.display = "flex";
+  });
+
+  btnEditCancel.addEventListener("click", () => {
+    editOverlay.style.display = "none";
+  });
+
+  editOverlay.addEventListener("click", (event) => {
+    if (event.target === editOverlay) {
+      editOverlay.style.display = "none";
     }
+  });
 
+  editForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const id = (document.getElementById("edit-booking-id") as HTMLInputElement)
+      .value;
+    const fromDate = (
+      document.getElementById("edit-fromDate") as HTMLInputElement
+    ).value;
+    const toDate = (document.getElementById("edit-toDate") as HTMLInputElement)
+      .value;
+    const message = (
+      document.getElementById("edit-message") as HTMLTextAreaElement
+    ).value;
+
+    await updateBooking(Number(id), {
+      fromDate,
+      toDate,
+      message,
+    });
+
+    editOverlay.style.display = "none";
+    showToast("✅ Bookingen din er oppdatert");
     await init();
   });
 }
@@ -184,5 +260,6 @@ async function init() {
 }
 
 setupBookingForm();
+setupEditButtons();
 
 init();
