@@ -49,8 +49,8 @@ function createBookingCard(booking: Booking, room: Room): string {
     />
     <div class="booking-content">
         <div class="booking-top">
-            <h3 class="room-name">${room.name}</h3>
-            <span class="${booking.status === "confirmed" ? "status-confirmed" : "status-pending"}">${booking.status}</span>
+      <h3 class="room-name"><a href="/src/pages/frida/room/room.html">${room.name}</a></h3>            
+      <span class="${booking.status === "confirmed" ? "status-confirmed" : "status-pending"}">${booking.status}</span>
         </div>
 
         <div class="dates">
