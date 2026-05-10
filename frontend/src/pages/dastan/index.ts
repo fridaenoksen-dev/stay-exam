@@ -1,4 +1,4 @@
-// Dastan Salah Hawrami
+// Dastan Salah Hawrami //
 
 
 
@@ -80,16 +80,3 @@ document.getElementById("opprett-knapp")?.addEventListener("click" , async() => 
   });
 });
 
-
-
-
-    /*const navn = prompt ("Navn på rom:");
-    const beskrivelse = prompt ("Beskrivelse:");
-    const pris =prompt ("Pris per natt:");
-
-    await opprettRoom({
-        name: navn!,
-        description: beskrivelse!,
-        pricePrNight: Number(pris)
-    });
-    visRom();*/
