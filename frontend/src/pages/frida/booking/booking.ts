@@ -273,3 +273,60 @@ setupBookingForm();
 setupEditButtons();
 
 init();
+
+// Konami easter egg
+const konamiCode = [
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowLeft",
+  "ArrowRight",
+];
+
+let konamiIndex = 0;
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === konamiCode[konamiIndex]) {
+    konamiIndex++;
+    if (konamiIndex === konamiCode.length) {
+      console.log("Konami kode aktivert");
+      startEasterEgg();
+      konamiIndex = 0;
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+
+function startEasterEgg(): void {
+  const emojies = ["✈️", "🚗", "🧳", "🗺️", "🌏", "🎒"];
+
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const emoji = document.createElement("div");
+      emoji.textContent = emojies[Math.floor(Math.random() * emojies.length)];
+      emoji.style.cssText = `
+      position: fixed;
+      font-size: ${Math.random() * 30 + 20}px;
+      left: ${Math.random() * 100}vw;
+      top: -60px;
+      z-index: 9999;
+      transition: top ${Math.random() * 2 + 2}s linear;
+      pointer-events: none;
+      `;
+
+      document.body.appendChild(emoji);
+
+      setTimeout(() => {
+        emoji.style.top = "110vh";
+      }, 100);
+
+      setTimeout(() => {
+        document.body.removeChild(emoji);
+      }, 4000);
+    }, i * 150);
+  }
+}
