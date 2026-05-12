@@ -192,6 +192,15 @@
   font-size: 13px;
 }
 
+.booking-message {
+  margin-top: var(--s-2);
+  background: #faf7f4;
+  padding: var(--s-2) var(--s-3);
+  border-radius: 12px;
+  font-size: 14px;
+  margin-right: var(--s-2);
+}
+
 .booking-bottom {
   margin-top: var(--s-4);
   display: flex;

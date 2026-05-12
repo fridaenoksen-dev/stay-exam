@@ -74,6 +74,17 @@ function createBookingCard(booking: Booking, room: Room): string {
         ${room.features.map((feature) => `<span class="feature">${feature}</span>`).join("")}
       </div>
 
+      ${
+        booking.message
+          ? `
+        <div class="booking-message">
+          <div class="date-label">Melding til verten</div>
+          <p>${booking.message}</p>
+        </div>
+        `
+          : ""
+      }
+
       <div class="booking-bottom">
         <div class="price">
           <div class="price-label">Totalt</div>
@@ -84,7 +95,11 @@ function createBookingCard(booking: Booking, room: Room): string {
           </div>
       </div>
       <div class="actions">
-          <button class="btn-secondary btn-edit" data-id="${booking.id}">
+          <button class="btn-secondary btn-edit" 
+            data-id="${booking.id}" 
+            data-from="${booking.fromDate}"
+            data-to="${booking.toDate}"
+            data-message="${booking.message}">
             <i class="fa-regular fa-pen-to-square"></i>Endre booking
           </button>
           <button class="btn-delete" data-id="${booking.id}">
@@ -196,23 +211,18 @@ function setupEditButtons(): void {
     if (!button) return;
 
     const id = (button as HTMLElement).dataset.id;
-    const card = button.closest(".booking-card");
+    const fromDate = (button as HTMLElement).dataset.from ?? "";
+    const toDate = (button as HTMLElement).dataset.to ?? "";
+    const message = (button as HTMLElement).dataset.message ?? "";
 
-    if (!id || !card) return;
-
-    const fromDate =
-      card
-        .querySelector("date-item:first-child .date-value")
-        ?.textContent?.trim() ?? "";
-    const toDate =
-      card
-        .querySelector("date-item:last-child .date-value")
-        ?.textContent?.trim() ?? "";
+    if (!id) return;
 
     (document.getElementById("edit-booking-id") as HTMLInputElement).value = id;
     (document.getElementById("edit-fromDate") as HTMLInputElement).value =
       fromDate;
     (document.getElementById("edit-toDate") as HTMLInputElement).value = toDate;
+    (document.getElementById("edit-message") as HTMLTextAreaElement).value =
+      message;
 
     editOverlay.style.display = "flex";
   });
