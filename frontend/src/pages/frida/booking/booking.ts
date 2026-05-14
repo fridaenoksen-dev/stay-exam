@@ -129,22 +129,23 @@ async function renderBookings(bookings: Booking[]): Promise<void> {
 }
 
 function setupDeleteButtons(): void {
-  const deleteButtons = document.querySelectorAll(".btn-delete");
+  const cardList = document.getElementById("card-list");
+  if (!cardList) return;
 
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", async (event) => {
-      const id = (event.currentTarget as HTMLElement).dataset.id;
+  cardList.addEventListener("click", async (event) => {
+    const button = (event.target as HTMLElement).closest(".btn-delete");
+    if (!button) return;
 
-      if (!id) return;
+    const id = (button as HTMLElement).dataset.id;
+    if (!id) return;
 
-      const confirmed = confirm(
-        "Er du sikker på at du vil kansellere bookingen?",
-      );
-      if (!confirmed) return;
+    const confirmed = confirm(
+      "Er du sikker på at du vil kansellere bookingen?",
+    );
+    if (!confirmed) return;
 
-      await deleteBooking(Number(id));
-      await init();
-    });
+    await deleteBooking(Number(id));
+    await init();
   });
 }
 
@@ -266,15 +267,14 @@ function setupEditButtons(): void {
 async function init() {
   const bookings = await getBookings();
   await renderBookings(bookings);
-  setupDeleteButtons();
 }
 
 setupBookingForm();
 setupEditButtons();
+setupDeleteButtons();
 
 init();
 
-// Konami easter egg
 const konamiCode = [
   "ArrowUp",
   "ArrowUp",
