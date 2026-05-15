@@ -44,10 +44,11 @@ npm install
 ```
 
 3. Lag en `.env` fil i crudops-mappen:
-   TEMPLATE=stay.json
-API_KEY=stay123
 
-4. Start APIet:
+   TEMPLATE=stay.json
+   API_KEY=stay123
+
+5. Start APIet:
 ```bash
 npm start
 ```
