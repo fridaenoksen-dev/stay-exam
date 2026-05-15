@@ -210,7 +210,7 @@ function setupBookingForm(): void {
   });
 
   bookingForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // VIKTIG Hindrer siden i å laste på nytt
+    event.preventDefault();
 
     const fromDate = (document.getElementById("fromDate") as HTMLInputElement)
       .value;
@@ -219,8 +219,12 @@ function setupBookingForm(): void {
     const message = (document.getElementById("message") as HTMLTextAreaElement)
       .value;
 
+    const userJson = localStorage.getItem("user");
+    const user = userJson ? JSON.parse(userJson) : null;
+    const userId = user ? user.id : 1;
+
     await createBooking({
-      userId: 1,
+      userId: userId,
       roomId: 1,
       fromDate,
       toDate,
@@ -305,7 +309,6 @@ function setupEditButtons(): void {
 async function init() {
   const isLoggedIn = checkAuth();
   if (!isLoggedIn) return;
-
   const bookings = await getBookings();
   await renderBookings(bookings);
 }

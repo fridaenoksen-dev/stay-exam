@@ -3,10 +3,14 @@ import type { Booking, Room } from "./booking.types";
 const API_URL = "http://localhost:3000/api";
 
 export async function getBookings(): Promise<Booking[]> {
-  const response = await fetch(`${API_URL}/bookings?userId=1`);
+  const userJson = localStorage.getItem("user");
+  const user = userJson ? JSON.parse(userJson) : null;
+  const userId = user ? user.id : 1;
+
+  const response = await fetch(`${API_URL}/bookings?userId=${userId}`);
 
   if (!response.ok) {
-    throw new Error("Klarte ikke hente bookinger");
+    throw new Error("Klarte ikke hente bookingene");
   }
 
   return response.json();
