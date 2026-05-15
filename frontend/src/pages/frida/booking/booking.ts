@@ -7,6 +7,44 @@ import {
 } from "./request";
 import type { Booking, Room } from "./booking.types";
 
+function checkAuth(): boolean {
+  const userJson = localStorage.getItem("user");
+
+  if (!userJson) {
+    const cardList = document.getElementById("card-list");
+    if (cardList) {
+      cardList.innerHTML = `
+        <div class ="login-message">
+        <p>Logg inn for å få en oversikt over dine bookinger.</p>
+        <a href="/login.html" class="btn-primary">Logg inn</a>
+      </div>
+      `;
+    }
+    return false;
+  }
+  return true;
+}
+
+function setupNav(): void {
+  const userJson = localStorage.getItem("user");
+
+  const navGuest = document.querySelector(".nav-guest") as HTMLElement;
+  const navUser = document.querySelector(".nav-user") as HTMLElement;
+
+  if (userJson) {
+    navGuest.style.display = "none";
+    navUser.style.display = "flex";
+  } else {
+    navGuest.style.display = "flex";
+    navUser.style.display = "none";
+  }
+
+  document.querySelector(".btn-logout")?.addEventListener("click", () => {
+    localStorage.removeItem("user");
+    window.location.href = "/login.html";
+  });
+}
+
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleDateString("nb-NO", {
@@ -49,7 +87,7 @@ function createBookingCard(booking: Booking, room: Room): string {
     />
     <div class="booking-content">
         <div class="booking-top">
-      <h3 class="room-name"><a href="/src/pages/frida/room/room.html">${room.name}</a></h3>            
+      <h3 class="room-name"><a href="/src/pages/frida/room/room.html?id=${booking.roomId}">${room.name}</a></h3>            
       <span class="${booking.status === "confirmed" ? "status-confirmed" : "status-pending"}">${booking.status}</span>
         </div>
 
@@ -265,6 +303,9 @@ function setupEditButtons(): void {
 }
 
 async function init() {
+  const isLoggedIn = checkAuth();
+  if (!isLoggedIn) return;
+
   const bookings = await getBookings();
   await renderBookings(bookings);
 }
@@ -272,6 +313,7 @@ async function init() {
 setupBookingForm();
 setupEditButtons();
 setupDeleteButtons();
+setupNav();
 
 init();
 
@@ -292,7 +334,6 @@ document.addEventListener("keydown", (event) => {
   if (event.key === konamiCode[konamiIndex]) {
     konamiIndex++;
     if (konamiIndex === konamiCode.length) {
-      console.log("Konami kode aktivert");
       startEasterEgg();
       konamiIndex = 0;
     }

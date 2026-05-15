@@ -36,7 +36,8 @@ nav {
   border-bottom: none;
 }
 
-.nav-guest {
+.nav-guest,
+.nav-user {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -106,11 +107,14 @@ p {
   color: #ffb700;
 }
 
+.fa-arrow-right-from-bracket {
+  color: #7a1f1b;
+}
+
 /* btn */
 
 button {
   font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
   font-style: normal;
 }
 
@@ -143,7 +147,7 @@ button {
   border: 1px solid #b23a32;
   border-radius: 999px;
   padding: 6px 12px;
-  color: #b23a32;
+  color: #7a1f1b;
   cursor: pointer;
 }
 

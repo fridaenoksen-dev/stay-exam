@@ -2,9 +2,8 @@ import type { Booking, Room } from "./booking.types";
 
 const API_URL = "http://localhost:3000/api";
 
-// GET booking funksjon
 export async function getBookings(): Promise<Booking[]> {
-  const response = await fetch(`${API_URL}/bookings`);
+  const response = await fetch(`${API_URL}/bookings?userId=1`);
 
   if (!response.ok) {
     throw new Error("Klarte ikke hente bookinger");
@@ -13,7 +12,6 @@ export async function getBookings(): Promise<Booking[]> {
   return response.json();
 }
 
-// DELETE booking funksjon
 export async function deleteBooking(id: number): Promise<void> {
   const response = await fetch(`${API_URL}/bookings/${id}`, {
     method: "DELETE",
@@ -25,7 +23,6 @@ export async function deleteBooking(id: number): Promise<void> {
   }
 }
 
-// CREATE booking funksjon
 export async function createBooking(
   booking: Omit<Booking, "id" | "created" | "updated">,
 ): Promise<Booking> {
@@ -45,7 +42,6 @@ export async function createBooking(
   return response.json();
 }
 
-// GET room funksjon
 export async function getRoom(id: number): Promise<Room> {
   const response = await fetch(`${API_URL}/rooms/${id}`);
 
@@ -59,7 +55,7 @@ export async function getRoom(id: number): Promise<Room> {
 // EDIT booking funksjon
 export async function updateBooking(
   id: number,
-  booking: Partial<Omit<Booking, "id" | "created" | "updated">>, //Partial gjør at man bare kan sende det man vil endre. Alle feltene er valgfrie.
+  booking: Partial<Omit<Booking, "id" | "created" | "updated">>,
 ): Promise<Booking> {
   const response = await fetch(`${API_URL}/bookings/${id}`, {
     method: "PATCH",
